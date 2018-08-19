@@ -8,13 +8,13 @@ body {
 #container {
     margin: 0 auto;
     padding: 0 20px 10px 20px;
-    border: 1px solid #666666:
+    border: 1px solid #666666;
     width: 865px;
     padding-top: 10px;
 }
 #header {
     font-size: 1.3em;
-    border: 1px solid #666666:
+    border: 1px solid #666666;
     background: #EAECEE;
     padding: 0 15px 5px 15px;
     margin-bottom: 50px;

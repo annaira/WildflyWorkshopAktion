@@ -20,6 +20,10 @@ Change the archetype to
 
 Change the command `mvn package jboss-as:deploy` to `mvn package wildfly:deploy`.
 
+**Chapter 3**
+
+I can't get the welcome file to work. Do I need a web.xml?
+
 **Appendix**
 
 URLs for the TimeServlet:    
