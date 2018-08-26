@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Named
 public class SpendeListController implements Serializable {
 	
-	private static final long serialVersionUID = 1885753183520722288L;
+	private static final long serialVersionUID = 1885753183520722288L;	
 
     private Aktion aktion;
 
