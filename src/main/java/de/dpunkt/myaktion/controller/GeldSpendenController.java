@@ -12,7 +12,9 @@ import java.io.Serializable;
 @Named
 public class GeldSpendenController implements Serializable {
 
-    private String textColor = "000000";
+	private static final long serialVersionUID = 5417028731084607094L;
+	
+	private String textColor = "000000";
     private String bgColor = "ffffff";
     private Spende spende;
     private Long aktionId;

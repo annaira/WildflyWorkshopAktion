@@ -12,7 +12,9 @@ import java.io.Serializable;
 @Named
 public class SpendeFormEditController implements Serializable {
 
-    private String textColor = "000000";
+	private static final long serialVersionUID = 6419765374199358664L;
+
+	private String textColor = "000000";
     private String bgColor = "ffffff";
     private Aktion aktion;
 

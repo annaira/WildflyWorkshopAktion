@@ -11,8 +11,10 @@ import java.io.Serializable;
 @SessionScoped
 @Named
 public class AktionEditController implements Serializable {
-
-    @Inject
+	
+	private static final long serialVersionUID = -99279115241068449L;
+	
+	@Inject
     private AktionListProducer aktionListProducer;
 
 
