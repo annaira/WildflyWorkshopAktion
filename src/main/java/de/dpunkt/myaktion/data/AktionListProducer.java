@@ -16,7 +16,9 @@ import java.util.List;
 @Named
 public class AktionListProducer implements Serializable {
 
-    private List<Aktion> aktionen;
+	private static final long serialVersionUID = 3307596445605019126L;
+	
+	private List<Aktion> aktionen;
 
     public List<Aktion> getAktionen() {
         return aktionen;

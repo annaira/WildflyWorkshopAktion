@@ -1,6 +1,5 @@
 package time;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,9 @@ import java.util.Date;
 @WebServlet(name = "Time Servlet", urlPatterns = {"/TimeServlet"})
 public class TimeServlet extends HttpServlet {
 
-    @Override
+	private static final long serialVersionUID = -4192601306923754501L;
+
+	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
