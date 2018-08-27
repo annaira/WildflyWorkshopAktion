@@ -16,35 +16,35 @@ public class AktionListController implements Serializable {
 	private static final long serialVersionUID = 1163110341764473909L;
 
 	@Inject
-    private AktionEditController aktionEditController;
+	private AktionEditController aktionEditController;
 
-    @Inject
-    private SpendeListController spendeListController;
+	@Inject
+	private SpendeListController spendeListController;
 
-    @Inject
-    private SpendeFormEditController spendeFormEditController;
+	@Inject
+	private SpendeFormEditController spendeFormEditController;
 
-    public String doAddAktion(Aktion aktion) {
-        aktionEditController.setAktionToEdit(Mode.ADD);
-        return Pages.AKTION_EDIT;
-    }
+	public String doAddAktion(Aktion aktion) {
+		aktionEditController.setAktionToEdit(Mode.ADD);
+		return Pages.AKTION_EDIT;
+	}
 
-    public String doEditAktion() {
-        aktionEditController.setAktionToEdit(Mode.EDIT);
-        return Pages.AKTION_EDIT;
-    }
+	public String doEditAktion(Aktion aktion) {
+		aktionEditController.setAktionToEdit(Mode.EDIT);
+		return Pages.AKTION_EDIT;
+	}
 
-    public String doEditSpendeForm(Aktion aktion) {
-       spendeFormEditController.setAktion(aktion);
-        return Pages.SPENDE_FORM_EDIT;
-    }
+	public String doEditSpendeForm(Aktion aktion) {
+		spendeFormEditController.setAktion(aktion);
+		return Pages.SPENDE_FORM_EDIT;
+	}
 
-    public String doListSpende(Aktion aktion) {
-        spendeListController.setAktion(aktion);
-        return Pages.SPENDE_LIST;
-    }
+	public String doListSpende(Aktion aktion) {
+		spendeListController.setAktion(aktion);
+		return Pages.SPENDE_LIST;
+	}
 
-    public void doDeleteAktion(Aktion aktion) {
-        System.out.println("Aktion löschen noch nicht implementiert");
-    }
+	public void doDeleteAktion(Aktion aktion) {
+		System.out.println("Aktion löschen noch nicht implementiert");
+	}
 }
