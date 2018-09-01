@@ -11,13 +11,16 @@
 
 		<h:form acceptcharset="ISO-8859-1">
 			<h:panelGrid columns="2">
+			
+				<h:outputLabel value="Titel:" />
+				<h:inputText id="title" value="#{spendeFormEditController.formConfig.title}"/>
 
 				<h:outputLabel value="Hintergrundfarbe:" />
-				<p:colorPicker id="bgColor" value="#{formConfig.bgColor}"
+				<p:colorPicker id="bgColor" value="#{spendeFormEditController.formConfig.bgColor}"
 					widgetVar="bgPicker" />
 
 				<h:outputLabel value="Textfarbe:" />
-				<p:colorPicker id="textColor" value="#{formConfig.textColor}"
+				<p:colorPicker id="textColor" value="#{spendeFormEditController.formConfig.textColor}"
 					widgetVar="textPicker" />
 
 				<h:outputLabel value="URL der Formulars:" />

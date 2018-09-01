@@ -16,6 +16,9 @@ public class GeldSpendenController implements Serializable {
 	
 	private String textColor = "000000";
     private String bgColor = "ffffff";
+    
+    private String title = "Geld spenden";
+    
     private Spende spende;
     private Long aktionId;
 
@@ -48,8 +51,15 @@ public class GeldSpendenController implements Serializable {
         this.bgColor = bgColor;
     }
 
+    public String getTitle() {
+		return title;
+	}
 
-    public Long getAktionId() {
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Long getAktionId() {
         return aktionId;
     }
 

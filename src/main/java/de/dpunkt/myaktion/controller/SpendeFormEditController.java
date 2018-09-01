@@ -16,32 +16,45 @@ public class SpendeFormEditController implements Serializable {
 	private static final long serialVersionUID = 6419765374199358664L;
 
 	private FormConfig formConfig;
-    private Aktion aktion;
+	private Aktion aktion;
 
-    public String doOk() {
-        return Pages.AKTION_LIST;
-    }
+	public SpendeFormEditController() {
+		formConfig = new FormConfig();
+	}
 
-    public String getUrl() {
-        return getAppUrl() + "/" + Pages.GELD_SPENDEN + ".jsf" + "?bgColor=" + formConfig.getBgColor() + "&textColor=" + formConfig.getTextColor() + "&aktionId=" + aktion.getId();
-    }
+	public String doOk() {
+		return Pages.AKTION_LIST;
+	}
 
-    private String getAppUrl() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String scheme = request.getScheme();
-        String serverName = request.getServerName();
-        int serverPort = request.getServerPort();
-        String contextPath = request.getContextPath();
-        return scheme + "://" + serverName + ":" + serverPort + contextPath;
-    }
+	public String getUrl() {
+		return getAppUrl() + "/" + Pages.GELD_SPENDEN + ".jsf" + "?bgColor=" + formConfig.getBgColor() + "&textColor="
+				+ formConfig.getTextColor() + "&title=" + formConfig.getTitle() + "&aktionId=" + aktion.getId();
+	}
 
-    public Aktion getAktion() {
-        return aktion;
-    }
+	private String getAppUrl() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		String scheme = request.getScheme();
+		String serverName = request.getServerName();
+		int serverPort = request.getServerPort();
+		String contextPath = request.getContextPath();
+		return scheme + "://" + serverName + ":" + serverPort + contextPath;
+	}
 
-    public void setAktion(Aktion aktion) {
-        this.aktion = aktion;
-    }
+	public Aktion getAktion() {
+		return aktion;
+	}
 
+	public void setAktion(Aktion aktion) {
+		this.aktion = aktion;
+	}
+
+	public FormConfig getFormConfig() {
+		return formConfig;
+	}
+
+	public void setFormConfig(FormConfig formConfig) {
+		this.formConfig = formConfig;
+	}
 
 }
