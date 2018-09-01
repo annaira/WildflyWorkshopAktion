@@ -13,12 +13,11 @@
 			<h:panelGrid columns="2">
 
 				<h:outputLabel value="Hintergrundfarbe:" />
-				<p:colorPicker id="bgColor"
-					value="#{spendeFormEditController.bgColor}" widgetVar="bgPicker" />
+				<p:colorPicker id="bgColor" value="#{formConfig.bgColor}"
+					widgetVar="bgPicker" />
 
 				<h:outputLabel value="Textfarbe:" />
-				<p:colorPicker id="textColor"
-					value="#{spendeFormEditController.textColor}"
+				<p:colorPicker id="textColor" value="#{formConfig.textColor}"
 					widgetVar="textPicker" />
 
 				<h:outputLabel value="URL der Formulars:" />

@@ -1,6 +1,7 @@
 package de.dpunkt.myaktion.controller;
 
 import de.dpunkt.myaktion.model.Aktion;
+import de.dpunkt.myaktion.model.FormConfig;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -14,8 +15,7 @@ public class SpendeFormEditController implements Serializable {
 
 	private static final long serialVersionUID = 6419765374199358664L;
 
-	private String textColor = "000000";
-    private String bgColor = "ffffff";
+	private FormConfig formConfig;
     private Aktion aktion;
 
     public String doOk() {
@@ -23,7 +23,7 @@ public class SpendeFormEditController implements Serializable {
     }
 
     public String getUrl() {
-        return getAppUrl() + "/" + Pages.GELD_SPENDEN + ".jsf" + "?bgColor=" + bgColor + "&textColor=" + textColor + "&aktionId=" + aktion.getId();
+        return getAppUrl() + "/" + Pages.GELD_SPENDEN + ".jsf" + "?bgColor=" + formConfig.getBgColor() + "&textColor=" + formConfig.getTextColor() + "&aktionId=" + aktion.getId();
     }
 
     private String getAppUrl() {
@@ -33,22 +33,6 @@ public class SpendeFormEditController implements Serializable {
         int serverPort = request.getServerPort();
         String contextPath = request.getContextPath();
         return scheme + "://" + serverName + ":" + serverPort + contextPath;
-    }
-
-    public String getTextColor() {
-        return textColor;
-    }
-
-    public void setTextColor(String textColor) {
-        this.textColor = textColor;
-    }
-
-    public String getBgColor() {
-        return bgColor;
-    }
-
-    public void setBgColor(String bgColor) {
-        this.bgColor = bgColor;
     }
 
     public Aktion getAktion() {
