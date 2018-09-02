@@ -18,6 +18,6 @@
 	bean-discovery-mode="all">
 
 	<alternatives>
-		<class>de.dpunkt.myaktion.services.MockAktionServiceBean</class>
-	</alternatives>
+<!-- 		<class>de.dpunkt.myaktion.services.MockAktionServiceBean</class>
+ -->	</alternatives>
 </beans>

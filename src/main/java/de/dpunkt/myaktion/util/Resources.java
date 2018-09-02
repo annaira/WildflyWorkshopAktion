@@ -10,8 +10,15 @@ import java.util.logging.Logger;
 public class Resources {
 
 	@Produces
+	@TecLog
+	public Logger produceTechLog(InjectionPoint injectionPoint) {
+		return Logger.getLogger("TecLog: " + injectionPoint.getMember().getDeclaringClass().getName());
+	}
+
+	@Produces
+	@FachLog
 	public Logger produceLog(InjectionPoint injectionPoint) {
-		return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+		return Logger.getLogger("FachLog: " +injectionPoint.getMember().getDeclaringClass().getName());
 	}
 
 	@Produces

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.dpunkt.myaktion.model.Spende;
+import de.dpunkt.myaktion.util.FachLog;
 
 @ViewScoped
 @Named
@@ -22,6 +23,7 @@ public class GeldSpendenController implements Serializable {
 	private FacesContext facesContext;
 
 	@Inject
+	@FachLog
 	private Logger logger;
 
 	private String textColor = "000000";
