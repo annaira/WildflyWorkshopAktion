@@ -39,7 +39,7 @@ public class AktionEditController implements Serializable {
 		setAktionToEdit(mode, new Aktion());
 	}
 
-	private void setAktionToEdit(Mode mode, Aktion aktion) {
+	void setAktionToEdit(Mode mode, Aktion aktion) {
 		this.aktion = aktion;
 		this.mode = mode;
 	}

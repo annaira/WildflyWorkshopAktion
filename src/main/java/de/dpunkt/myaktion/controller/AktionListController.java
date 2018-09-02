@@ -36,7 +36,7 @@ public class AktionListController implements Serializable {
 	}
 
 	public String doEditAktion(Aktion aktion) {
-		aktionEditController.setAktionToEdit(Mode.EDIT);
+		aktionEditController.setAktionToEdit(Mode.EDIT, aktion);
 		return Pages.AKTION_EDIT;
 	}
 
