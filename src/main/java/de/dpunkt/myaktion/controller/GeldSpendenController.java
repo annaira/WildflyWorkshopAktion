@@ -2,56 +2,65 @@ package de.dpunkt.myaktion.controller;
 
 import de.dpunkt.myaktion.model.Spende;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 @SessionScoped
 @Named
 public class GeldSpendenController implements Serializable {
 
 	private static final long serialVersionUID = 5417028731084607094L;
-	
+
+	@Inject
+	private FacesContext facesContext;
+
+	@Inject
+	private Logger logger;
+
 	private String textColor = "000000";
-    private String bgColor = "ffffff";
-    
-    private String title = "Geld spenden";
-    
-    private Spende spende;
-    private Long aktionId;
+	private String bgColor = "ffffff";
 
+	private String title = "Geld spenden";
 
-    public GeldSpendenController() {
-        this.spende = new Spende();
-    }
+	private Spende spende;
+	private Long aktionId;
 
-    public Spende getSpende() {
-        return spende;
-    }
+	@PostConstruct
+	public void init() {
+		this.spende = new Spende();
+	}
 
-    public void setSpende(Spende spende) {
-        this.spende = spende;
-    }
+	public Spende getSpende() {
+		return spende;
+	}
 
-    public String getTextColor() {
-        return textColor;
-    }
+	public void setSpende(Spende spende) {
+		this.spende = spende;
+	}
 
-    public void setTextColor(String textColor) {
-        this.textColor = textColor;
-    }
+	public String getTextColor() {
+		return textColor;
+	}
 
-    public String getBgColor() {
-        return bgColor;
-    }
+	public void setTextColor(String textColor) {
+		this.textColor = textColor;
+	}
 
-    public void setBgColor(String bgColor) {
-        this.bgColor = bgColor;
-    }
+	public String getBgColor() {
+		return bgColor;
+	}
 
-    public String getTitle() {
+	public void setBgColor(String bgColor) {
+		this.bgColor = bgColor;
+	}
+
+	public String getTitle() {
 		return title;
 	}
 
@@ -60,19 +69,19 @@ public class GeldSpendenController implements Serializable {
 	}
 
 	public Long getAktionId() {
-        return aktionId;
-    }
+		return aktionId;
+	}
 
-    public void setAktionId(Long aktionId) {
-        this.aktionId = aktionId;
-    }
+	public void setAktionId(Long aktionId) {
+		this.aktionId = aktionId;
+	}
 
-    public String doSpende() {
-        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Vielen Dank für die Spende", null);
-        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-        this.spende = new Spende();
-
-        return Pages.GELD_SPENDEN;
-    }
+	public String doSpende() {
+		logger.info(spende.getSpenderName() + " hat " + spende.getBetrag() + " Euro gespendet.");
+		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Vielen Dank für die Spende", null);
+		facesContext.addMessage(null, facesMessage);
+		init();
+		return Pages.GELD_SPENDEN;
+	}
 
 }

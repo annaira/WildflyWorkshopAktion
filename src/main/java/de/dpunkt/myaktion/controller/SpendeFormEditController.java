@@ -1,19 +1,23 @@
 package de.dpunkt.myaktion.controller;
 
-import de.dpunkt.myaktion.model.Aktion;
-import de.dpunkt.myaktion.model.FormConfig;
+import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
+
+import de.dpunkt.myaktion.model.Aktion;
+import de.dpunkt.myaktion.model.FormConfig;
 
 @SessionScoped
 @Named
 public class SpendeFormEditController implements Serializable {
 
 	private static final long serialVersionUID = 6419765374199358664L;
+
+	@Inject
+	private HttpServletRequest request;
 
 	private FormConfig formConfig;
 	private Aktion aktion;
@@ -32,8 +36,6 @@ public class SpendeFormEditController implements Serializable {
 	}
 
 	private String getAppUrl() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
 		String scheme = request.getScheme();
 		String serverName = request.getServerName();
 		int serverPort = request.getServerPort();

@@ -1,13 +1,14 @@
 package de.dpunkt.myaktion.controller;
 
+import java.io.Serializable;
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Spende.Status;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
-import java.io.Serializable;
-
-@SessionScoped
+@RequestScoped
 @Named
 public class SpendeListController implements Serializable {
 	

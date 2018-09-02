@@ -13,7 +13,7 @@
 
 			<p:growl id="message" showDetail="true" />
 
-			<p:dataTable value="#{aktionListProducer.aktionen}" var="aktion">
+			<p:dataTable value="#{aktionen}" var="aktion">
 				<p:column>
 					<p:commandButton icon="ui-icon-close"
 						actionListener="#{aktionListController.doDeleteAktion(aktion)}">
