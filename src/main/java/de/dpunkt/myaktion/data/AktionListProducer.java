@@ -2,6 +2,7 @@ package de.dpunkt.myaktion.data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -12,8 +13,10 @@ import javax.inject.Named;
 
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.services.AktionService;
+import de.dpunkt.myaktion.util.TecLog;
 import de.dpunkt.myaktion.util.Events.Added;
 import de.dpunkt.myaktion.util.Events.Deleted;
+import de.dpunkt.myaktion.util.Events.Updated;
 
 @SessionScoped
 public class AktionListProducer implements Serializable {
@@ -22,6 +25,10 @@ public class AktionListProducer implements Serializable {
 
 	@Inject
 	private AktionService aktionService;
+
+	@Inject
+	@TecLog
+	private Logger logger;
 
 	private List<Aktion> aktionen;
 
@@ -42,5 +49,9 @@ public class AktionListProducer implements Serializable {
 
 	public void onAktionDeleted(@Observes @Deleted Aktion aktion) {
 		getAktionen().remove(aktion);
+	}
+
+	public void onAktionUpdated(@Observes @Updated Aktion aktion) {
+		logger.warning("Updating is not implemented yet.");
 	}
 }

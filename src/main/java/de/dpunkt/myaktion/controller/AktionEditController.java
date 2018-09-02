@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.util.Events.Added;
+import de.dpunkt.myaktion.util.Events.Updated;
 
 @SessionScoped
 @Named
@@ -19,6 +20,10 @@ public class AktionEditController implements Serializable {
 	@Inject
 	@Added
 	private Event<Aktion> aktionAddEventSrc;
+
+	@Inject
+	@Updated
+	private Event<Aktion> aktionUpdateEventSrc;
 
 	public enum Mode {
 		EDIT, ADD
@@ -47,6 +52,8 @@ public class AktionEditController implements Serializable {
 	public String doSave() {
 		if (getMode() == Mode.ADD) {
 			aktionAddEventSrc.fire(aktion);
+		} else {
+			aktionUpdateEventSrc.fire(aktion);
 		}
 		return Pages.AKTION_LIST;
 	}
