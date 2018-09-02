@@ -1,59 +1,61 @@
 package de.dpunkt.myaktion.controller;
 
-import de.dpunkt.myaktion.data.AktionListProducer;
-import de.dpunkt.myaktion.model.Aktion;
+import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.Serializable;
+
+import de.dpunkt.myaktion.model.Aktion;
+import de.dpunkt.myaktion.util.Events.Added;
 
 @SessionScoped
 @Named
 public class AktionEditController implements Serializable {
-	
+
 	private static final long serialVersionUID = -99279115241068449L;
-	
+
 	@Inject
-    private AktionListProducer aktionListProducer;
+	@Added
+	private Event<Aktion> aktionAddEventSrc;
 
+	public enum Mode {
+		EDIT, ADD
+	}
 
-    public enum Mode {
-        EDIT, ADD
-    }
+	private Aktion aktion;
+	private Mode mode;
 
-    private Aktion aktion;
-    private Mode mode;
+	public Mode getMode() {
+		return mode;
+	}
 
-    public Mode getMode() {
-        return mode;
-    }
+	public Aktion getAktion() {
+		return aktion;
+	}
 
-    public Aktion getAktion() {
-        return aktion;
-    }
+	public void setAktionToEdit(Mode mode) {
+		setAktionToEdit(mode, new Aktion());
+	}
 
-    public void setAktionToEdit(Mode mode) {
-        setAktionToEdit(mode, new Aktion());
-    }
+	private void setAktionToEdit(Mode mode, Aktion aktion) {
+		this.aktion = aktion;
+		this.mode = mode;
+	}
 
-    private void setAktionToEdit(Mode mode, Aktion aktion) {
-        this.aktion = aktion;
-        this.mode = mode;
-    }
+	public String doSave() {
+		if (getMode() == Mode.ADD) {
+			aktionAddEventSrc.fire(aktion);
+		}
+		return Pages.AKTION_LIST;
+	}
 
-    public String doSave() {
-        if (getMode() == Mode.ADD) {
-            aktionListProducer.getAktionen().add(aktion);
-        }
-        return Pages.AKTION_LIST;
-    }
+	public String doCancel() {
+		return Pages.AKTION_LIST;
+	}
 
-    public String doCancel() {
-        return Pages.AKTION_LIST;
-    }
-
-    public String getTitle() {
-        return getMode() == Mode.EDIT ? "Aktion editieren" : "Neue Aktion anlegen";
-    }
+	public String getTitle() {
+		return getMode() == Mode.EDIT ? "Aktion editieren" : "Neue Aktion anlegen";
+	}
 }

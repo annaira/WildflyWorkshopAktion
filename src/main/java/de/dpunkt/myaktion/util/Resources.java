@@ -4,7 +4,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import java.util.logging.Logger;
 
@@ -19,11 +18,5 @@ public class Resources {
 	@RequestScoped
 	public FacesContext producesFacesContext() {
 		return FacesContext.getCurrentInstance();
-	}
-
-	@Produces
-	@RequestScoped
-	HttpServletRequest produceRequest() {
-		return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	}
 }

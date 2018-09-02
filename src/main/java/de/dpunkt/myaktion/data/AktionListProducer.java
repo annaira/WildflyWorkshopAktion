@@ -1,27 +1,31 @@
 package de.dpunkt.myaktion.data;
 
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Produces;
+import javax.inject.Named;
+
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.model.Konto;
 import de.dpunkt.myaktion.model.Spende;
 import de.dpunkt.myaktion.model.Spende.Status;
-
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
+import de.dpunkt.myaktion.util.Events.Added;
+import de.dpunkt.myaktion.util.Events.Deleted;
 
 @SessionScoped
 public class AktionListProducer implements Serializable {
 
 	private static final long serialVersionUID = 3307596445605019126L;
 
-	@Inject
-	@Named
 	private List<Aktion> aktionen;
 
+	@Named
+	@Produces
 	public List<Aktion> getAktionen() {
 		return aktionen;
 	}
@@ -29,6 +33,14 @@ public class AktionListProducer implements Serializable {
 	@PostConstruct
 	public void init() {
 		aktionen = createMockAktionen();
+	}
+
+	public void onAktionAdded(@Observes @Added Aktion aktion) {
+		getAktionen().add(aktion);
+	}
+	
+	public void onAktionDeleted(@Observes @Deleted Aktion aktion) {
+		getAktionen().remove(aktion);
 	}
 
 	private List<Aktion> createMockAktionen() {

@@ -1,13 +1,15 @@
 package de.dpunkt.myaktion.controller;
 
-import de.dpunkt.myaktion.model.Aktion;
-
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
 
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import de.dpunkt.myaktion.controller.AktionEditController.Mode;
+import de.dpunkt.myaktion.model.Aktion;
+import de.dpunkt.myaktion.util.Events.Deleted;
 
 @SessionScoped
 @Named
@@ -23,6 +25,10 @@ public class AktionListController implements Serializable {
 
 	@Inject
 	private SpendeFormEditController spendeFormEditController;
+
+	@Inject
+	@Deleted
+	private Event<Aktion> aktionDeleteEventSrc;
 
 	public String doAddAktion(Aktion aktion) {
 		aktionEditController.setAktionToEdit(Mode.ADD);
@@ -45,6 +51,6 @@ public class AktionListController implements Serializable {
 	}
 
 	public void doDeleteAktion(Aktion aktion) {
-		System.out.println("Aktion löschen noch nicht implementiert");
+		aktionDeleteEventSrc.fire(aktion);
 	}
 }
