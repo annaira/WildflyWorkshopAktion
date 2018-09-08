@@ -3,7 +3,7 @@ package de.dpunkt.myaktion.services;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.util.TecLog;
 
-@RequestScoped
+@Stateless
 public class AktionServiceBean implements AktionService {
 
 	@Inject
