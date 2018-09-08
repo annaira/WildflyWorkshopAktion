@@ -1,58 +1,87 @@
 package de.dpunkt.myaktion.model;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Spende {
 
-    private Double betrag;
-    private String spenderName;
-    private Boolean quittung;
-    private Status status;
-    private Konto konto;
+	@GeneratedValue
+	@Id
+	private Long id;
+	@ManyToOne
+	private Aktion aktion;
+	private Double betrag;
+	private String spenderName;
+	private Boolean quittung;
+	private Status status;
+	@Embedded
+	private Konto konto;
 
-    public enum Status{
-        UEBERWIESEN, IN_BERARBEITUNG;
-    }
+	public enum Status {
+		UEBERWIESEN, IN_BERARBEITUNG;
+	}
 
-    public Spende(){
-        this.konto = new Konto();
-    }
+	public Spende() {
+		this.konto = new Konto();
+	}
 
-    public Double getBetrag() {
-        return betrag;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setBetrag(Double betrag) {
-        this.betrag = betrag;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getSpenderName() {
-        return spenderName;
-    }
+	public Aktion getAktion() {
+		return aktion;
+	}
 
-    public void setSpenderName(String spenderName) {
-        this.spenderName = spenderName;
-    }
+	public void setAktion(Aktion aktion) {
+		this.aktion = aktion;
+	}
 
-    public Boolean getQuittung() {
-        return quittung;
-    }
+	public Double getBetrag() {
+		return betrag;
+	}
 
-    public void setQuittung(Boolean quittung) {
-        this.quittung = quittung;
-    }
+	public void setBetrag(Double betrag) {
+		this.betrag = betrag;
+	}
 
-    public Status getStatus() {
-        return status;
-    }
+	public String getSpenderName() {
+		return spenderName;
+	}
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+	public void setSpenderName(String spenderName) {
+		this.spenderName = spenderName;
+	}
 
-    public Konto getKonto() {
-        return konto;
-    }
+	public Boolean getQuittung() {
+		return quittung;
+	}
 
-    public void setKonto(Konto konto) {
-        this.konto = konto;
-    }
+	public void setQuittung(Boolean quittung) {
+		this.quittung = quittung;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Konto getKonto() {
+		return konto;
+	}
+
+	public void setKonto(Konto konto) {
+		this.konto = konto;
+	}
 }

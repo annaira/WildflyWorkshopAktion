@@ -2,13 +2,28 @@ package de.dpunkt.myaktion.model;
 
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Aktion {
     private String name;
     private Double spendenZiel;
     private Double spendenBetrag;
     private Double bisherGespendet;
+    @AttributeOverrides({@AttributeOverride(name="name", column=@Column(name="kontoName"))})
+    @Embedded
     private Konto konto;
+    @GeneratedValue
+	@Id
     private Long id;
+    @OneToMany
     private List<Spende> spenden;
 
     public Aktion() {
