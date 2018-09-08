@@ -16,8 +16,9 @@ import de.dpunkt.myaktion.services.AktionService;
 @Alternative
 public class MockAktionServiceBean implements AktionService {
 
-	@Override
-	public List<Aktion> getAllAktionen() {
+	private List<Aktion> aktionen;
+
+	public MockAktionServiceBean() {
 		Spende spende1 = new Spende();
 		spende1.setSpenderName("Heinz Schmidt");
 		spende1.setBetrag(20d);
@@ -54,11 +55,30 @@ public class MockAktionServiceBean implements AktionService {
 		aktion2.setKonto(aktion1.getKonto());
 		aktion2.setSpenden(spenden);
 
-		List<Aktion> ret = new LinkedList<>();
-		ret.add(aktion1);
-		ret.add(aktion2);
+		aktionen = new LinkedList<>();
+		aktionen.add(aktion1);
+		aktionen.add(aktion2);
+	}
 
-		return ret;
+	@Override
+	public List<Aktion> getAllAktionen() {
+		return aktionen;
+	}
+
+	@Override
+	public void addAktion(Aktion aktion) {
+		aktionen.add(aktion);
+	}
+
+	@Override
+	public void deleteAktion(Aktion aktion) {
+		aktionen.remove(aktion);
+	}
+
+	@Override
+	public void updateAktion(Aktion aktion) {
+		aktionen.remove(aktion);
+		aktionen.add(aktion);
 	}
 
 }

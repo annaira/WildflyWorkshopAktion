@@ -1,11 +1,9 @@
 package de.dpunkt.myaktion.data;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -13,15 +11,12 @@ import javax.inject.Named;
 
 import de.dpunkt.myaktion.model.Aktion;
 import de.dpunkt.myaktion.services.AktionService;
-import de.dpunkt.myaktion.util.TecLog;
 import de.dpunkt.myaktion.util.Events.Added;
 import de.dpunkt.myaktion.util.Events.Deleted;
 import de.dpunkt.myaktion.util.Events.Updated;
+import de.dpunkt.myaktion.util.TecLog;
 
-@SessionScoped
-public class AktionListProducer implements Serializable {
-
-	private static final long serialVersionUID = 3307596445605019126L;
+public class AktionListProducer {
 
 	@Inject
 	private AktionService aktionService;
@@ -44,14 +39,17 @@ public class AktionListProducer implements Serializable {
 	}
 
 	public void onAktionAdded(@Observes @Added Aktion aktion) {
-		getAktionen().add(aktion);
+		aktionService.addAktion(aktion);
+		init();
 	}
 
 	public void onAktionDeleted(@Observes @Deleted Aktion aktion) {
-		getAktionen().remove(aktion);
+		aktionService.deleteAktion(aktion);
+		init();
 	}
 
 	public void onAktionUpdated(@Observes @Updated Aktion aktion) {
-		logger.warning("Updating is not implemented yet.");
+		aktionService.updateAktion(aktion);
+		init();
 	}
 }
