@@ -14,8 +14,8 @@ import de.dpunkt.myaktion.util.TecLog;
 @Stateless
 public class AktionServiceBean implements AktionService {
 
-	@Inject
 	@TecLog
+	@Inject	
 	private Logger logger;
 
 	@Inject
@@ -28,6 +28,10 @@ public class AktionServiceBean implements AktionService {
 		TypedQuery<Aktion> query = entityManager.createNamedQuery(Aktion.findAll, Aktion.class);
 
 		List<Aktion> aktionen = query.getResultList();
+		for(Aktion aktion : aktionen ) {
+			Double bisherGespendet = getBisherGespendet(aktion);
+			aktion.setBisherGespendet(bisherGespendet);
+		}
 		return aktionen;
 	}
 
@@ -45,6 +49,13 @@ public class AktionServiceBean implements AktionService {
 	@Override
 	public void updateAktion(Aktion aktion) {
 		entityManager.merge(aktion);
+	}
+	
+	private Double getBisherGespendet(Aktion aktion) {
+		TypedQuery<Double> query = entityManager.createNamedQuery(Aktion.getBisherGespendet, Double.class);
+		query.setParameter("aktion", aktion);
+		Double result = query.getSingleResult();
+		return result == null ? 0d : result;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,16 +13,21 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
-@NamedQueries({ @NamedQuery(name = Aktion.findAll, query = "SELECT a FROM Aktion a ORDER BY a.name") })
+@NamedQueries({ @NamedQuery(name = Aktion.findAll, query = "SELECT a FROM Aktion a ORDER BY a.name"),
+		@NamedQuery(name = Aktion.getBisherGespendet, query = "SELECT SUM(s.betrag) FROM Spende s WHERE s.aktion = :aktion") })
+
 @Entity
 public class Aktion {
 
 	public static final String findAll = "Aktion.findAll";
+	public static final String getBisherGespendet = "Aktion.getBisherGespendet";
 
 	private String name;
 	private Double spendenZiel;
 	private Double spendenBetrag;
+	@Transient
 	private Double bisherGespendet;
 	@AttributeOverrides({ @AttributeOverride(name = "name", column = @Column(name = "kontoName")) })
 	@Embedded
@@ -29,7 +35,7 @@ public class Aktion {
 	@GeneratedValue
 	@Id
 	private Long id;
-	@OneToMany
+	@OneToMany(mappedBy="aktion", cascade=CascadeType.REMOVE)
 	private List<Spende> spenden;
 
 	public Aktion() {
