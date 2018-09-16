@@ -14,6 +14,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @NamedQueries({ @NamedQuery(name = Aktion.findAll, query = "SELECT a FROM Aktion a ORDER BY a.name"),
 		@NamedQuery(name = Aktion.getBisherGespendet, query = "SELECT SUM(s.betrag) FROM Spende s WHERE s.aktion = :aktion") })
@@ -23,9 +26,14 @@ public class Aktion {
 
 	public static final String findAll = "Aktion.findAll";
 	public static final String getBisherGespendet = "Aktion.getBisherGespendet";
-
+	@NotNull
+	@Size(min = 4, max = 30, message = "Der Name einer Aktion muss min. 4 und darf max. 30 Zeichen lang sein.")
 	private String name;
+	@NotNull(message = "Bitte ein Spendenziel angeben.")
+	@DecimalMin(value = "10.00", message = "Das Spendenziel für die Aktion muss min. 10 Euro sein.")
 	private Double spendenZiel;
+	@NotNull(message = "Bitte einen Spendenbetrag angeben.")
+	@DecimalMin(value = "1.00", message = "Der Spendenbetrag muss min. 1 Euro sein.")
 	private Double spendenBetrag;
 	@Transient
 	private Double bisherGespendet;
@@ -35,7 +43,7 @@ public class Aktion {
 	@GeneratedValue
 	@Id
 	private Long id;
-	@OneToMany(mappedBy="aktion", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy = "aktion", cascade = CascadeType.REMOVE)
 	private List<Spende> spenden;
 
 	public Aktion() {

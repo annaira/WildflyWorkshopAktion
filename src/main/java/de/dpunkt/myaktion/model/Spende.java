@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Spende {
@@ -12,12 +15,20 @@ public class Spende {
 	@GeneratedValue
 	@Id
 	private Long id;
+	@NotNull
 	@ManyToOne
 	private Aktion aktion;
+	@NotNull(message = "Bitte einen Spendenbetrag angeben.")
+	@DecimalMin(value = "1.00", message = "Der Spendenbetrag muss min. 1 Euro sein.")
 	private Double betrag;
+	@NotNull
+	@Size(min = 5, max = 40, message = "Der Name eines Spenders muss min. 5 und darf max. 40 Zeichen lang sein.")
 	private String spenderName;
+	@NotNull
 	private Boolean quittung;
+	@NotNull
 	private Status status;
+	@NotNull
 	@Embedded
 	private Konto konto;
 

@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+	<f:viewParam id="bgColor" name="bgColor"
+		value="#{geldSpendenController.bgColor}">
+	</f:viewParam>
+	<f:viewParam id="textColor" name="textColor"
+		value="#{geldSpendenController.textColor}">
+	</f:viewParam>
+	<f:viewParam id="title" name="title" required="true"
+		value="#{geldSpendenController.title}">
+	</f:viewParam>
+	<f:viewParam id="aktionId" name="aktionId" converter="javax.faces.Long"
+		value="#{geldSpendenController.aktionId}" />
+</f:metadata>
+
 <h:head>
 	<title>#{geldSpendenController.title}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<h:outputStylesheet name="css/screen.css" />
-	<f:metadata>
-		<f:viewParam id="bgColor" name="bgColor"
-			value="#{geldSpendenController.bgColor}">
-			<f:validateRegex pattern="[A-Fa-f0-9]{6}" />
-		</f:viewParam>
-		<f:viewParam id="textColor" name="textColor"
-			value="#{geldSpendenController.textColor}">
-			<f:validateRegex pattern="[A-Fa-f0-9]{6}" />
-		</f:viewParam>
-		<f:viewParam id="title" name="title"
-			value="#{geldSpendenController.title}">
-		</f:viewParam>
-		<f:viewParam id="aktionId" name="aktionId"
-			converter="javax.faces.Long"
-			value="#{geldSpendenController.aktionId}" />
-	</f:metadata>
 </h:head>
+
 <h:body
 	style="background-color: ##{geldSpendenController.bgColor}; color: ##{geldSpendenController.textColor};">
 	<h1>#{geldSpendenController.title}</h1>
@@ -39,28 +39,24 @@
 				<p:outputLabel value="Name:" />
 				<p:inputText id="name"
 					value="#{geldSpendenController.spende.spenderName}">
-					<f:validateRequired />
 				</p:inputText>
 				<p:message for="name" style="color: red;" />
 
 				<p:outputLabel value="Konto-Nr.:" />
 				<p:inputText id="konto"
 					value="#{geldSpendenController.spende.konto.kontoNr}">
-					<f:validateRequired />
 				</p:inputText>
 				<p:message for="konto" style="color: red;" />
 
 				<p:outputLabel value="BLZ:" />
 				<p:inputText id="blz"
 					value="#{geldSpendenController.spende.konto.blz}">
-					<f:validateRequired />
 				</p:inputText>
 				<p:message for="blz" style="color: red;" />
 
 				<p:outputLabel value="Name der Bank:" />
 				<p:inputText id="name_bank"
 					value="#{geldSpendenController.spende.konto.nameDerBank}">
-					<f:validateRequired />
 				</p:inputText>
 				<p:message for="name_bank" style="color: red;" />
 
@@ -68,7 +64,6 @@
 				<h:panelGroup>
 					<p:inputText id="spendenbetrag"
 						value="#{geldSpendenController.spende.betrag}">
-						<f:validateRequired />
 						<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 					</p:inputText> EUR
             	</h:panelGroup>

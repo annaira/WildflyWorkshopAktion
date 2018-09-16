@@ -5,10 +5,10 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import de.dpunkt.myaktion.model.Spende;
 import de.dpunkt.myaktion.model.Spende.Status;
@@ -16,7 +16,7 @@ import de.dpunkt.myaktion.services.SpendeService;
 import de.dpunkt.myaktion.util.FachLog;
 
 @SessionScoped
-@Named
+@ManagedBean
 public class GeldSpendenController implements Serializable {
 
 	private static final long serialVersionUID = 5417028731084607094L;
